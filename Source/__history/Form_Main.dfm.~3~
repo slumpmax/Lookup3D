@@ -1,0 +1,658 @@
+object FormMain: TFormMain
+  Left = 0
+  Top = 0
+  Caption = 'Lookup 3D Viewer'
+  ClientHeight = 600
+  ClientWidth = 980
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  KeyPreview = True
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnMouseWheel = FormMouseWheel
+  OnResize = FormResize
+  DesignSize = (
+    980
+    600)
+  TextHeight = 13
+  object ButtonOBJ: TSpeedButton
+    Left = 683
+    Top = 257
+    Width = 40
+    Height = 22
+    Anchors = [akRight, akBottom]
+    GroupIndex = 1
+    Down = True
+    Caption = 'OBJ'
+    OnClick = ButtonOBJClick
+    ExplicitLeft = 687
+    ExplicitTop = 258
+  end
+  object ButtonExport: TSpeedButton
+    Left = 920
+    Top = 257
+    Width = 52
+    Height = 22
+    Anchors = [akRight, akBottom]
+    Caption = 'Export'
+    OnClick = ButtonExportClick
+    ExplicitLeft = 924
+    ExplicitTop = 258
+  end
+  object ButtonDAE: TSpeedButton
+    Left = 725
+    Top = 257
+    Width = 40
+    Height = 22
+    Anchors = [akRight, akBottom]
+    GroupIndex = 1
+    Caption = 'DAE'
+    OnClick = ButtonDAEClick
+    ExplicitLeft = 729
+    ExplicitTop = 258
+  end
+  object ButtonRAW: TSpeedButton
+    Left = 767
+    Top = 257
+    Width = 40
+    Height = 22
+    Anchors = [akRight, akBottom]
+    GroupIndex = 1
+    Caption = 'RAW'
+    OnClick = ButtonRAWClick
+    ExplicitLeft = 771
+    ExplicitTop = 258
+  end
+  object Button3DS: TSpeedButton
+    Left = 809
+    Top = 257
+    Width = 40
+    Height = 22
+    Anchors = [akRight, akBottom]
+    GroupIndex = 1
+    Caption = '3DS'
+    OnClick = Button3DSClick
+    ExplicitLeft = 813
+    ExplicitTop = 258
+  end
+  object ButtonAll: TSpeedButton
+    Left = 851
+    Top = 257
+    Width = 40
+    Height = 22
+    Anchors = [akRight, akBottom]
+    GroupIndex = 1
+    Caption = 'All'
+    OnClick = ButtonAllClick
+    ExplicitLeft = 855
+    ExplicitTop = 258
+  end
+  object Panel1: TPanel
+    Left = 153
+    Top = 59
+    Width = 524
+    Height = 462
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    BevelOuter = bvLowered
+    Color = clWhite
+    TabOrder = 0
+    OnMouseDown = Panel1MouseDown
+    OnMouseMove = Panel1MouseMove
+    OnMouseUp = Panel1MouseUp
+    ExplicitWidth = 522
+    ExplicitHeight = 458
+    DesignSize = (
+      524
+      462)
+    object PaintBoxGL: TPaintBox
+      Left = 144
+      Top = 64
+      Width = 105
+      Height = 105
+    end
+    object PanelProgress: TPanel
+      Left = 54
+      Top = 189
+      Width = 417
+      Height = 82
+      Anchors = []
+      BorderWidth = 4
+      Caption = 'Loading...'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -27
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      VerticalAlignment = taAlignTop
+      Visible = False
+      ExplicitLeft = 53
+      ExplicitTop = 187
+      object ProgressBar1: TProgressBar
+        Left = 8
+        Top = 48
+        Width = 401
+        Height = 25
+        TabOrder = 0
+      end
+    end
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 581
+    Width = 980
+    Height = 19
+    Panels = <
+      item
+        Text = 'Idle'
+        Width = 600
+      end
+      item
+        Width = 50
+      end>
+    ParentFont = True
+    SizeGrip = False
+    UseSystemFont = False
+    ExplicitTop = 577
+    ExplicitWidth = 978
+  end
+  object PageControl1: TPageControl
+    Left = 683
+    Top = 279
+    Width = 289
+    Height = 293
+    ActivePage = TabSheet1
+    Anchors = [akRight, akBottom]
+    TabOrder = 2
+    ExplicitLeft = 681
+    ExplicitTop = 275
+    object TabSheet1: TTabSheet
+      Caption = 'Main'
+      object ListBoxOrder: TListBox
+        Left = 3
+        Top = 3
+        Width = 30
+        Height = 86
+        ItemHeight = 13
+        Items.Strings = (
+          'XYZ'
+          'XZY'
+          'YXZ'
+          'YZX'
+          'ZXY'
+          'ZYX')
+        TabOrder = 0
+        OnClick = ListBoxOrderClick
+      end
+      object CheckBox1: TCheckBox
+        Left = 39
+        Top = 3
+        Width = 50
+        Height = 17
+        Caption = 'Flip X'
+        TabOrder = 1
+        OnClick = CheckBox1Click
+      end
+      object CheckBox2: TCheckBox
+        Tag = 1
+        Left = 39
+        Top = 19
+        Width = 50
+        Height = 17
+        Caption = 'Flip Y'
+        TabOrder = 2
+        OnClick = CheckBox1Click
+      end
+      object CheckBox3: TCheckBox
+        Tag = 2
+        Left = 39
+        Top = 35
+        Width = 50
+        Height = 17
+        Caption = 'Flip Z'
+        TabOrder = 3
+        OnClick = CheckBox1Click
+      end
+      object CheckBox4: TCheckBox
+        Tag = 3
+        Left = 39
+        Top = 51
+        Width = 50
+        Height = 17
+        Caption = 'Flip W'
+        TabOrder = 4
+        OnClick = CheckBox1Click
+      end
+    end
+  end
+  object GridFile: TStringGrid
+    Left = 683
+    Top = 58
+    Width = 289
+    Height = 198
+    Anchors = [akTop, akRight, akBottom]
+    ColCount = 2
+    DefaultColWidth = 48
+    DefaultRowHeight = 20
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goThumbTracking]
+    TabOrder = 3
+    OnClick = GridFileClick
+    OnMouseWheelDown = GridFileMouseWheelDown
+    OnMouseWheelUp = GridFileMouseWheelUp
+    ExplicitLeft = 681
+    ExplicitHeight = 194
+    ColWidths = (
+      48
+      48)
+    RowHeights = (
+      20
+      20
+      20
+      20
+      20)
+  end
+  object Panel2: TPanel
+    Left = 8
+    Top = 527
+    Width = 669
+    Height = 45
+    Anchors = [akLeft, akRight, akBottom]
+    TabOrder = 4
+    ExplicitTop = 523
+    ExplicitWidth = 667
+    object Label1: TLabel
+      Left = 38
+      Top = 24
+      Width = 42
+      Height = 13
+      Caption = 'map_Kd:'
+    end
+    object LabelTexture: TLabel
+      Left = 83
+      Top = 24
+      Width = 59
+      Height = 13
+      Caption = '(no texture)'
+    end
+    object Label2: TLabel
+      Left = 8
+      Top = 5
+      Width = 72
+      Height = 13
+      Caption = 'Material Name:'
+    end
+    object LabelMatName: TLabel
+      Left = 83
+      Top = 5
+      Width = 61
+      Height = 13
+      Caption = '(no material)'
+    end
+  end
+  object ListBoxTexture: TListBox
+    Left = 8
+    Top = 382
+    Width = 138
+    Height = 140
+    Anchors = [akLeft, akTop, akBottom]
+    ItemHeight = 13
+    Sorted = True
+    TabOrder = 5
+    OnClick = ListBoxTextureClick
+    ExplicitHeight = 136
+  end
+  object TreeObject: TTreeView
+    Left = 8
+    Top = 58
+    Width = 138
+    Height = 159
+    HideSelection = False
+    Indent = 19
+    ReadOnly = True
+    TabOrder = 6
+    OnClick = TreeObjectClick
+  end
+  object TreeMaterial: TTreeView
+    Left = 8
+    Top = 223
+    Width = 138
+    Height = 153
+    HideSelection = False
+    Indent = 19
+    ReadOnly = True
+    TabOrder = 7
+    OnClick = TreeObjectClick
+  end
+  object ToolBar1: TToolBar
+    Left = 0
+    Top = 0
+    Width = 980
+    Height = 23
+    AutoSize = True
+    ButtonHeight = 21
+    ButtonWidth = 41
+    Caption = 'ToolBar1'
+    Flat = False
+    Indent = 8
+    ParentShowHint = False
+    ShowCaptions = True
+    ShowHint = True
+    TabOrder = 8
+    Transparent = False
+    ExplicitWidth = 978
+    object ToolButton1: TToolButton
+      Left = 8
+      Top = 0
+      Action = ActionSmoothNormals
+    end
+    object ToolButton2: TToolButton
+      Left = 49
+      Top = 0
+      Action = ActionCreateSmooths
+    end
+    object ToolButton3: TToolButton
+      Left = 90
+      Top = 0
+      Action = ActionCreateAverages
+    end
+    object ToolButton4: TToolButton
+      Left = 131
+      Top = 0
+      Action = ActionCreateFlats
+    end
+    object ButtonDeleteNormals: TToolButton
+      Left = 172
+      Top = 0
+      Action = ActionDeleteNormals
+      AllowAllUp = True
+    end
+    object ToolButton5: TToolButton
+      Left = 213
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton5'
+      ImageIndex = 0
+      Style = tbsSeparator
+    end
+    object ToolButton7: TToolButton
+      Left = 221
+      Top = 0
+      Action = ActionMoveToCenter
+    end
+    object ToolButton6: TToolButton
+      Left = 262
+      Top = 0
+      Action = ActionReverseOrder
+    end
+    object ToolButton22: TToolButton
+      Left = 303
+      Top = 0
+      Action = ActionReverseFace
+    end
+    object ToolButton20: TToolButton
+      Left = 344
+      Top = 0
+      Action = ActionMatrix
+      AllowAllUp = True
+    end
+    object ToolButton12: TToolButton
+      Left = 385
+      Top = 0
+      Action = ActionTogglePivot
+    end
+    object ToolButton21: TToolButton
+      Left = 426
+      Top = 0
+      Action = ActionTogglePosition
+    end
+    object ToolButton23: TToolButton
+      Left = 467
+      Top = 0
+      Action = ActionToggleScale
+    end
+    object ToolButton18: TToolButton
+      Left = 508
+      Top = 0
+      Action = ActionToggleAlpha
+    end
+    object ToolButton19: TToolButton
+      Left = 549
+      Top = 0
+      Action = ActionStructure
+    end
+    object ToolButton8: TToolButton
+      Left = 590
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton8'
+      ImageIndex = 0
+      Style = tbsSeparator
+    end
+    object ToolButton9: TToolButton
+      Left = 598
+      Top = 0
+      Action = ActionViewFront
+    end
+    object ToolButton13: TToolButton
+      Left = 639
+      Top = 0
+      Action = ActionViewBack
+    end
+    object ToolButton14: TToolButton
+      Left = 680
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton14'
+      ImageIndex = 0
+      Style = tbsSeparator
+    end
+    object ToolButton10: TToolButton
+      Left = 688
+      Top = 0
+      Action = ActionViewLeft
+    end
+    object ToolButton15: TToolButton
+      Left = 729
+      Top = 0
+      Action = ActionViewRight
+    end
+    object ToolButton16: TToolButton
+      Left = 770
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton16'
+      ImageIndex = 0
+      Style = tbsSeparator
+    end
+    object ToolButton11: TToolButton
+      Left = 778
+      Top = 0
+      Action = ActionViewTop
+    end
+    object ToolButton17: TToolButton
+      Left = 819
+      Top = 0
+      Action = ActionViewBottom
+    end
+  end
+  object EditFolder: TEdit
+    Left = 8
+    Top = 31
+    Width = 887
+    Height = 21
+    Anchors = [akTop, akRight]
+    DoubleBuffered = False
+    ParentDoubleBuffered = False
+    TabOrder = 9
+    Text = 'd:\Models'
+    ExplicitLeft = 6
+  end
+  object ButtonBrowse: TButton
+    Left = 897
+    Top = 29
+    Width = 75
+    Height = 25
+    Anchors = [akTop, akRight]
+    Caption = '&Browse...'
+    DoubleBuffered = False
+    ParentDoubleBuffered = False
+    TabOrder = 10
+    OnClick = ButtonBrowseClick
+    ExplicitLeft = 895
+  end
+  object TimerProgress: TTimer
+    Enabled = False
+    OnTimer = TimerProgressTimer
+    Left = 152
+    Top = 24
+  end
+  object ApplicationEvents1: TApplicationEvents
+    OnIdle = ApplicationEvents1Idle
+    Left = 184
+    Top = 24
+  end
+  object ActionList1: TActionList
+    Left = 216
+    Top = 24
+    object ActionSmoothNormals: TAction
+      Category = 'Normals'
+      Caption = 'SNorm'
+      Hint = 'Smooth normals'
+      ShortCut = 112
+      OnExecute = ActionSmoothNormalsExecute
+    end
+    object ActionCreateSmooths: TAction
+      Category = 'Normals'
+      Caption = '+SNrm'
+      Hint = 'Create smooth normals'
+      ShortCut = 113
+      OnExecute = ActionCreateSmoothsExecute
+    end
+    object ActionMatrix: TAction
+      Category = 'Toggle'
+      Caption = 'Mtrx'
+      Hint = 'Toggle matrix'
+      OnExecute = ActionMatrixExecute
+    end
+    object ActionCreateAverages: TAction
+      Category = 'Normals'
+      Caption = '+ANrm'
+      Hint = 'Create average normals'
+      ShortCut = 114
+      OnExecute = ActionCreateAveragesExecute
+    end
+    object ActionCreateFlats: TAction
+      Category = 'Normals'
+      Caption = '+FNrm'
+      Hint = 'Create flat normals'
+      ShortCut = 115
+      OnExecute = ActionCreateFlatsExecute
+    end
+    object ActionReverseFace: TAction
+      Category = 'Toggle'
+      Caption = 'RFace'
+      Hint = 'Reverse face'
+      OnExecute = ActionReverseFaceExecute
+    end
+    object ActionReverseOrder: TAction
+      Category = 'Toggle'
+      Caption = 'ROrd'
+      Hint = 'Reverse paint order'
+      OnExecute = ActionReverseOrderExecute
+    end
+    object ActionMoveToCenter: TAction
+      Caption = 'Center'
+      Hint = 'Move to center'
+      OnExecute = ActionMoveToCenterExecute
+    end
+    object ActionViewFront: TAction
+      Category = 'View'
+      Caption = 'Front'
+      Hint = 'Front view'
+      OnExecute = ActionViewFrontExecute
+    end
+    object ActionDeleteFace: TAction
+      Caption = 'Del F'
+      Hint = 'Delete selected faces'
+      ShortCut = 46
+      OnExecute = ActionDeleteFaceExecute
+    end
+    object ActionViewLeft: TAction
+      Category = 'View'
+      Caption = 'Left'
+      Hint = 'Left view'
+      OnExecute = ActionViewLeftExecute
+    end
+    object ActionViewTop: TAction
+      Category = 'View'
+      Caption = 'Top'
+      Hint = 'Top view'
+      OnExecute = ActionViewTopExecute
+    end
+    object ActionTogglePivot: TAction
+      Category = 'Toggle'
+      Caption = 'Pivot'
+      Hint = 'Toggle pivot'
+      OnExecute = ActionTogglePivotExecute
+    end
+    object ActionDeleteNormals: TAction
+      Category = 'Normals'
+      Caption = '-Norm'
+      Hint = 'Delete normals'
+      ShortCut = 116
+      OnExecute = ActionDeleteNormalsExecute
+    end
+    object ActionViewBack: TAction
+      Category = 'View'
+      Caption = 'Back'
+      Hint = 'Back view'
+      OnExecute = ActionViewBackExecute
+    end
+    object ActionViewRight: TAction
+      Category = 'View'
+      Caption = 'Right'
+      Hint = 'Right view'
+      OnExecute = ActionViewRightExecute
+    end
+    object ActionViewBottom: TAction
+      Category = 'View'
+      Caption = 'Bttm'
+      Hint = 'Bottom view'
+      OnExecute = ActionViewBottomExecute
+    end
+    object ActionToggleAlpha: TAction
+      Category = 'Toggle'
+      Caption = 'Alpha'
+      Hint = 'Toggle alpha'
+      OnExecute = ActionToggleAlphaExecute
+    end
+    object ActionStructure: TAction
+      Caption = 'Info'
+      Hint = 'Show structure'
+      OnExecute = ActionStructureExecute
+    end
+    object ActionTogglePosition: TAction
+      Category = 'Toggle'
+      Caption = 'Pos'
+      Hint = 'Toggle position'
+      OnExecute = ActionTogglePositionExecute
+    end
+    object ActionToggleScale: TAction
+      Category = 'Toggle'
+      Caption = 'Scale'
+      Hint = 'Toggle scale'
+      OnExecute = ActionToggleScaleExecute
+    end
+    object ActionFlipX: TAction
+      Caption = 'ActionFlipX'
+      ShortCut = 117
+      OnExecute = ActionFlipXExecute
+    end
+  end
+end
