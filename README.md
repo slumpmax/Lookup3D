@@ -1,7 +1,7 @@
 # Loopup3D
 Preview &amp; Fix 3D object files
 
-## Format supports:
+## Format supports
 - 3DS
 - OBJ
 - RAW
@@ -14,3 +14,5 @@ Preview &amp; Fix 3D object files
 - Export to OBJ
 - Etc
 
+## Download
+- https://drive.google.com/file/d/1SPdFojimN6lKXaacUkU8Hya1M5vGHfCm/view?usp=sharing
