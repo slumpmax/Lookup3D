@@ -1,4 +1,4 @@
-# Loopup3D
+# Lookup3D
 - Preview &amp; Fix 3D object files
 - Source code in Delphi Community Edition v11.3
 
